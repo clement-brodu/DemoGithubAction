@@ -47,7 +47,10 @@ on:
 jobs:
 
   build:
-  
+
+    runs-on: windows-latest  # For a list of available runner types, refer to
+                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -55,8 +58,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore -c Release
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build -c Release --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test -c Release --no-build --verbosity normal
